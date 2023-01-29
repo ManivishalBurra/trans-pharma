@@ -1,0 +1,26 @@
+html{
+	scrollbar-width: none;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+	color: #212112;
+	background-position: center;
+	background-repeat: repeat;
+	background-size: 7%;
+	background-color: #fff;
+	overflow-x: hidden;
+    transition: all 200ms linear;
+    margin: 0;
+}
+.ant-header-custom {
+    box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
+    background-color: white;
+    
+}
+.custom-sider{
+    border-right: 1px solid #dadada;
+	
+}
