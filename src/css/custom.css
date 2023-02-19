@@ -22,5 +22,5 @@ body{
 }
 .custom-sider{
     border-right: 1px solid #dadada;
-	
+	flex: 0 0 2000px;
 }

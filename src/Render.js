@@ -1,4 +1,3 @@
-import { App } from 'antd';
 import React from 'react';
 import Home from "./pages/Home"
 import {Route, BrowserRouter as Router,Routes} from 'react-router-dom';
