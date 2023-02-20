@@ -7,7 +7,7 @@ function Render() {
   return (
     <Router>
       <Routes>
-      <Route exact path="/" element={<Home/>} />
+      <Route exact path="/:roomId" element={<Home/>} />
       {/* <Route  path="*" component={Error} /> */}
       </Routes>
     </Router>

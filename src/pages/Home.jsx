@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-var socket = new WebSocket("ws://localhost:8080/socket");
+import {useParams} from "react-router-dom"
 
-function Home() {
-  
+
+function Home({match}) {
+  let {roomId} = useParams();
+  var socket = new WebSocket(`ws://localhost:8080/socket/${roomId}`);
+  const [status, setStatus] = useState(roomId);
   socket.onopen = function () {
     console.log("Connect")
   };
 
   socket.onmessage = function (e) {
     console.log(e, "ramvinay")
+    setStatus(e.data)
   };
 
-  // function send() {
-  //   socket.send(input.value);
-  //   input.value = "";
-  // }
-
-  useEffect(()=>{
-    socket.send("hello burra")
-  },[])
-  
+  function send() {
+    socket.send("ram vinay");
+    
+  }
 
   return (
     <div>
-      <h1>hello world</h1>
+      <h1>{status}</h1>
     </div>
   );
 }
