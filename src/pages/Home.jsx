@@ -3,6 +3,7 @@ import { Menu, Icon, Form, Input, Button, DatePicker, Space } from 'antd';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import "../css/custom.css";
+import { backgroundColor, primaryColor, secondaryColor } from ".././constants/style"
 const Home = () => {
     const [form] = Form.useForm();
     const navigate = useNavigate()
@@ -15,7 +16,7 @@ const Home = () => {
       <Navbar selectedKey = "Home"/>
     <div className='truck' style={{display:"inline"}}> 
       <p style={{marginBottom:"0px"}}>Ease of transport that <br></br></p>
-      <p>your business deserve.</p> 
+      <p>your  <span style={{color:"#ed4d37"}}>business</span> deserve.</p> 
     </div>
     <div className='order-create' style={{fontFamily:"nunito"}}>
     <Form
@@ -35,18 +36,20 @@ const Home = () => {
       <Form.Item name="pick_date" label="Pick Up Date" style={{width:"30%", fontWeight:"bold", marginBottom:"10px"}}>
         
         <DatePicker 
+          format="DD-MM-YYYY"
           style={{borderRadius:"20px", width:"95%", marginRight:"5%", height:"40px", backgroundColor:"#EEEEEE"}} 
           onChange={e => console.log(e.target.value)}  
         />
   
       </Form.Item>
       <Form.Item name="drop_date" label="Drop Date" style={{width:"30%", fontWeight:"bold"}}>
-        <DatePicker 
+        <DatePicker
+          format="DD-MM-YYYY"
           style={{borderRadius:"20px", width:"100%", height:"40px", backgroundColor:"#EEEEEE"}}
         />
       </Form.Item>
-      <Form.Item style={{height:"40px",}} >
-        <Button htmlType="submit" type="primary" className="center shadow" style={{backgroundColor:"#FFE500", color:"black", width:"100%", height:"40px", borderRadius:"20px", fontWeight:"bold", marginTop:"30px", marginLeft:"70px"}}>Create Order</Button>
+      <Form.Item style={{height:"40px"}} >
+        <Button htmlType="submit" type="primary" className="center shadow" style={{backgroundColor: primaryColor, color:"black", width:"100%", height:"40px", borderRadius:"20px", fontWeight:"bold", marginTop:"30px", marginLeft:"70px"}}>Create Order</Button>
       </Form.Item>
       </div>
       

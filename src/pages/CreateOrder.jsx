@@ -1,10 +1,11 @@
 import React, { Component, useState } from 'react';
-import { Menu, Icon, Form, Input, Button, DatePicker, Select, InputNumber, Descriptions, Modal, Result } from 'antd';
+import { Menu, Icon, Form, Input, Button, DatePicker, Select, InputNumber, Descriptions, Steps, Modal, Result } from 'antd';
 import { Truck, Notification, Home2, Profile2User, BoxAdd } from 'iconsax-react';
 import moment from 'moment';
 import Navbar from '../components/Navbar';
 import "../css/custom.css";
 import { useParams } from 'react-router-dom';
+import { backgroundColor, primaryColor, secondaryColor } from ".././constants/style"
 const CreateOrder = () => {
     const [form] = Form.useForm();
     let {to, from, pick_date, drop_date} = useParams();
@@ -38,7 +39,7 @@ const CreateOrder = () => {
         <div style={{backgroundColor:"white", width:"100%", height:"89%", borderRadius:"20px", margin:"40px", padding:"30px"}}>
         <div style={{display:"flex", alignItems:"center"}}>
         <h1> Create Order </h1>
-        <BoxAdd size="32" color="#36454F" variant="TwoTone"/>
+        <BoxAdd size="32" color="#FF8A65" variant="TwoTone"/>
         </div>
         <Form
             layout="vertical"
@@ -60,6 +61,7 @@ const CreateOrder = () => {
       <Form.Item name="pick_date" label="Pick Up Date" style={{width:"30%", fontWeight:"bold", marginBottom:"10px"}}>
         
         <DatePicker 
+          format="DD-MM-YYYY"
           style={{borderRadius:"20px", width:"95%", marginRight:"5%", height:"40px", backgroundColor:"#EEEEEE"}} 
           onChange={e => console.log(e.target.value)}  
         />
@@ -67,13 +69,14 @@ const CreateOrder = () => {
       </Form.Item>
       <Form.Item name="drop_date" label="Drop Date" style={{width:"30%", fontWeight:"bold"}}>
         <DatePicker 
+          format="DD-MM-YYYY"
           style={{borderRadius:"20px", width:"100%", height:"40px", backgroundColor:"#EEEEEE"}}
         />
       </Form.Item>
       </div>
 
       <Form.Item name="ProductName" label="Name of the item" style={{width:"30%", fontWeight:"bold"}}>
-        <Input placeholder="Name of the Load you want to deliver" style={{borderRadius:"20px", width:"95%", marginRight:"5%", height:"40px", backgroundColor:"#EEEEEE"}} />
+        <Input placeholder="Name of the product you want to deliver" style={{borderRadius:"20px", width:"95%", marginRight:"5%", height:"40px", backgroundColor:"#EEEEEE"}} />
       </Form.Item>
 
       <div style={{display:"flex", justifyContent:"space-between"}}>
@@ -106,40 +109,56 @@ const CreateOrder = () => {
       </div>
 
       <Form.Item style={{height:"40px", width:"15%"}} >
-        <Button htmlType="submit" type="primary" className="center shadow" style={{backgroundColor:"#FFE500", color:"black", width:"100%", height:"40px", borderRadius:"20px", fontWeight:"bold", marginTop:"30px"}}>Create Order</Button>
+        <Button htmlType="submit" type="primary" className="center shadow" style={{backgroundColor:primaryColor, color:"black", width:"100%", height:"40px", borderRadius:"20px", fontWeight:"bold", marginTop:"30px"}}>Create Order</Button>
       </Form.Item>
     </Form>
         </div>    
     </div>
     <Modal title="Order Summary" open={isModalOpen} width={1200} footer={null} onCancel={handleCancel}>
+    <Steps
+    current={testOrderSuccess? 3 : 1}
+        items={[
+            {
+                title: 'Create Order',
+            },
+            {
+                title: 'Validate',
+                subTitle: 'Please Validate Your Order',
+            },
+            {
+                title: 'Submit Order',
+            },
+        ]}
+    />
+    <br/>
     {!testOrderSuccess ? <div>
     <Descriptions bordered>
     <Descriptions.Item label="Pick up Location">{orderDetails.from}</Descriptions.Item>
     <Descriptions.Item label="Drop Location" span={2}>{orderDetails.to}</Descriptions.Item>
     <Descriptions.Item label="Pick up Date">{orderDetails.pick_date}</Descriptions.Item>
     <Descriptions.Item label="Drop Date" span={2}>{orderDetails.drop_date}</Descriptions.Item>
-    <Descriptions.Item label="Product Name" span={3}>{orderDetails.productName}</Descriptions.Item>
+    <Descriptions.Item label="Product Name" span={3}>{orderDetails.ProductName}</Descriptions.Item>
     <Descriptions.Item label="Total Load Weight" span={3}>{orderDetails.totalLoadWeight}</Descriptions.Item>
     <Descriptions.Item label="Package Name" span={1}>{orderDetails.packageName}</Descriptions.Item>
     <Descriptions.Item label="Total packaging quanitities" span={2}>{orderDetails.totalPackages}</Descriptions.Item>
 
     <Descriptions.Item label="Width">23</Descriptions.Item>
-    <Descriptions.Item label="height">86</Descriptions.Item>
+    <Descriptions.Item label="Height">86</Descriptions.Item>
     <Descriptions.Item label="Breadth">45</Descriptions.Item>
     {/* <Descriptions.Item label="Status" span={3}>
       <Badge status="processing" text="Running" />
     </Descriptions.Item> */}
     
   </Descriptions>
-  <Button type="primary" onClick={()=> setTestOrderSuccess(true)} className="center shadow" style={{backgroundColor:"#FFE500", color:"black", width:"15%", height:"40px", borderRadius:"20px", fontWeight:"bold", marginTop:"30px"}}>Create Order</Button>
+  <Button type="primary" onClick={()=> setTestOrderSuccess(true)} className="center shadow" style={{backgroundColor:primaryColor, color:"black", width:"15%", height:"40px", borderRadius:"20px", fontWeight:"bold", marginTop:"30px"}}>Submit Order</Button>
   </div>
   :
   <Result
         status="success"
-        title="Order requested successfully! We will send you the update of the request in 3 days"
+        title="Order requested successfully! We will find you the driver in 3 days."
         subTitle="Order number: 2017182818828182881 Created successfully"
         extra={[
-        <Button key="console" style={{backgroundColor:"black", color:"white"}}>
+        <Button key ="console" style={{backgroundColor:"black", color:"white"}}>
             Go Home
         </Button>,
         <Button key="buy">My Orders</Button>,
