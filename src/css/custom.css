@@ -78,3 +78,13 @@ body{
 .shadow{
 	filter: drop-shadow(-2px 2px 0px rgba(47, 47, 47, 0));
 }
+.ant-menu-title-content {
+	display: flex!important;
+	align-items: center!important;
+	justify-content: center!important;
+}
+.ant-select-selector{
+	background-color: #EEEEEE!important;
+    height: 40px!important;
+    border-radius: 20px!important;
+}
